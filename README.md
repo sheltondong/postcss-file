@@ -132,14 +132,36 @@ Output:
 ```
 
 # Options
-option | description | default
----- | ---- | ----
-url | determines how to handle the url, "copy" or "inline". require assetsPath | "inline"
-assetsPath | where the assets should be copy to. | undefined
-publicPath | the prefix of output url | undefined
-extensions | determines which type of files should be handle | all
-include | determines where to search for assets | all
-exclude | determines which folder should be exclided | none
-hash | use hash to be the asset's name | false
+option | type | description | default
+---- | ---- | ---- | ----
+url | string | determines how to handle the url, "copy" or "inline". require assetsPath | "inline"
+assetsPath | string | where the assets should be copy to. | undefined
+publicPath | string | the prefix of output url | undefined
+extensions | string[] | determines which type of files should be handle | all
+include | string[] | determines where to search for assets | all
+exclude | string[] | determines which folder should be exclided | none
+hash | boolean | use hash to be the asset's name | false
+
+### For example
+
+```javascript
+postcss({
+  plugins: [
+    require({
+      url: 'copy',
+      assetsPath: './dist/assets',
+      publicPath: './assets/',
+      extensions: ['.jpg', '.png', '.gif', '.ttf', '.otf'],
+      include: [
+        'src'
+      ],
+      exclude: [
+        'node_modules',
+      ],
+      hash: true
+    })
+  ]
+})
+```
 
 See [PostCSS] docs for examples for your environment.
