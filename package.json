@@ -11,9 +11,15 @@
     "url",
     "asset"
   ],
-  "author": "shelton dong <dongxu2048@gmail.com>",
+  "author": "Shelton Dong <dongxu2048@gmail.com>",
   "license": "MIT",
-  "repository": "git@github.com:DongShelton/postcss-file.git",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:DongShelton/postcss-file.git"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
   "scripts": {
     "build": "rollup -c",
     "test": "jest",
@@ -21,7 +27,8 @@
     "lint": "tslint -p tsconfig.json"
   },
   "bugs": {
-    "url": "https://github.com/DongShelton/postcss-file/issues"
+    "url": "https://github.com/DongShelton/postcss-file/issues",
+    "email": "dongxu2048@gmail.com"
   },
   "homepage": "https://github.com/DongShelton/postcss-file",
   "dependencies": {
