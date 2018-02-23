@@ -1,0 +1,59 @@
+{
+  "defaultSeverity": "error",
+  "extends": ["tslint:recommended"],
+  "jsRules": {},
+  "rules": {
+    "no-console": false,
+    "quotemark": [true, "single"],
+    "interface-name": [false],
+    "jsdoc-format": [false],
+    "no-empty-interface": false,
+    "object-literal-sort-keys": false,
+    "prefer-for-of": false,
+    "no-var-requires": false,
+    "ordered-imports": false,
+    "align": false,
+    "no-namespace": false,
+    "only-arrow-functions": false,
+    "no-string-literal": false,
+    "indent": [true, "tabs", 2],
+    "no-unused-variable": [true, "check-parameters"],
+    "prefer-object-spread": true,
+    "max-line-length": false,
+    "trailing-comma": [
+      true,
+      {
+        "multiline": {
+          "objects": "alwals",
+          "arrays": "always",
+          "functions": "never",
+          "typeLiterals": "ignore"
+        },
+        "esSpecCompliant": true
+      }
+    ],
+    "whitespace": [
+      true,
+      "check-branch",
+      "check-decl",
+      "check-module",
+      "check-operator",
+      "check-separator",
+      "check-type",
+      "check-typecast"
+    ],
+    "member-ordering": [
+      true,
+      {
+        "order": [
+          "static-field",
+          "static-method",
+          "instance-field",
+          "constructor",
+          "instance-method"
+        ]
+      }
+    ]
+  },
+  "rulesDirectory": []
+}
