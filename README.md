@@ -26,6 +26,7 @@ module.exports = {
           loader: 'postcss-loader',
           options: {
             plugins: [
+              // other plugins ...
               require('postcss-file')({
                 url: 'copy',
                 assetsPath: 'dist/assets',
@@ -53,6 +54,7 @@ const config = {
     postcss({
       // ...
       plugins: [
+        // other plugins ...
         require('postcss-file')({
           url: 'copy',
           assetsPath: 'dist/assets',
@@ -66,7 +68,7 @@ const config = {
 
 export default config;
 ```
-#### Note: You must use options to specify how would you like to handle your assets in your css, if you don't pass any options, PostCSS File will do nothing about your assets.
+#### Note: You must use options to specify how would you like to handle your assets in your css, if you don't pass any options, PostCSS File will do nothing about your assets. Additionally, for the full effects for your assets, please put PostCSS File plugin on the lastest of postcss plugins.
 
 # Url Resolve
 

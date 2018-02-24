@@ -4,15 +4,55 @@ import { shouldHandle } from './utils/filters';
 import { handleAsset } from './utils/urlHandler';
 import { validateOptions } from './utils/validators';
 
+// Url type
 export type URL = 'copy' | 'inline';
 
-export interface PostcssFileOptions {
+/**
+ * PostCSS File plugin options
+ *
+ * @property extensions
+ * @property include
+ * @property exclude
+ * @property url
+ * @property assetsPath
+ * @property publicPath
+ * @property hash
+ */
+export interface PostcssFileOptions extends Object {
+	/**
+   * @default undefined
+   * @description determines which type of files should be handle
+   */
 	extensions?: string[];
+	/**
+   * @default undefined
+   * @description determines where to search for assets
+   */
 	include?: string[];
+	/**
+   * @default undefined
+   * @description determines which folder should be exclided
+   */
 	exclude?: string[];
+	/**
+   * @default "inline"
+   * @description determines how to handle the url, "copy" or "inline". require assetsPath | "inline"
+   */
 	url?: URL;
+	/**
+   * @default undefined
+   * @description where the assets should be copy to.
+   */
 	assetsPath?: string;
+	/**
+   * @default undefined
+   * @description the prefix of output url
+   */
 	publicPath?: string;
+	/**
+   * @default false
+   * @description use hash to be the asset's name
+   */
 	hash?: boolean;
 }
 
@@ -26,7 +66,14 @@ export default postcss.plugin<PostcssFileOptions>('postcss-file', (options): Tra
 			};
 
 		return function(root) {
+
 			root.walkDecls(/(background|src)/, function(decl) {
+				// do nothing if this declaration is already have been handled
+				if ((decl as any).handled) {
+					return;
+				}
+				// set handled flag to fix the error, which would handle assets repetitively.
+				(decl as any).handled = true;
 				// test whether there is url value
 				if (!/url/.test(decl.value)) {
 					return;

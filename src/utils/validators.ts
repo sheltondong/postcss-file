@@ -5,6 +5,12 @@ const warn = (message: string) => {
 	console.warn(chalk.bold.yellow(message));
 };
 
+/**
+ * Check the options, and throw error if it's invalid.
+ *
+ * @param options
+ * @throws Invalid options
+ */
 export const validateOptions = (options: PostcssFileOptions | undefined) => {
 	if (!options) {
 		return false;
