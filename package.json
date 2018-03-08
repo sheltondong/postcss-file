@@ -1,6 +1,6 @@
 {
   "name": "postcss-file",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "PostCSS plugin for handle assets",
   "main": "dist/index.js",
   "keywords": [

@@ -46,7 +46,9 @@ export interface AssetHandlerOptions extends PostcssFileOptions {
  * @returns the value of url
  */
 export const handleAsset = (options: AssetHandlerOptions): string => {
-	const assetPath = path.resolve(path.dirname(options.importer), options.file);
+	// this is to cover hash or search case, like url('./assets/icon.svg?734fa123521');
+	const [ file, cleanFile, search ] = options.file.match(/(.+?)([\?\#].*)/) || ['', options.file, ''];
+	const assetPath = path.resolve(path.dirname(options.importer), cleanFile);
 	const data = fs.readFileSync(assetPath);
 	// copy or inline
 	switch (options.url) {
@@ -57,7 +59,7 @@ export const handleAsset = (options: AssetHandlerOptions): string => {
 			if (options.publicPath) {
 				return options.publicPath + filename;
 			} else {
-				return path.resolve('/', options.assetsPath as string, filename);
+				return path.resolve('/', options.assetsPath as string, filename + search);
 			}
 		// insert the asset as a inline base64 code
 		case 'inline':
@@ -65,6 +67,6 @@ export const handleAsset = (options: AssetHandlerOptions): string => {
 			return `data:image/${type};base64,${data.toString('base64')}`;
 		// do nothing if it has a invalid url option
 		default:
-			return options.file;
+			return options.file + search;
 	}
 };

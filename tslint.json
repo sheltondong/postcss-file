@@ -17,7 +17,6 @@
     "only-arrow-functions": false,
     "no-string-literal": false,
     "indent": [true, "tabs", 2],
-    "no-unused-variable": [true, "check-parameters"],
     "prefer-object-spread": true,
     "max-line-length": false,
     "trailing-comma": [

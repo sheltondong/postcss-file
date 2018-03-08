@@ -79,31 +79,28 @@ export default postcss.plugin<PostcssFileOptions>('postcss-file', (options): Tra
 					return;
 				}
 				// test whether the value of url is valid
-				const urlReg = /(\"|\')(.+?)(\1)/;
-				const matchs: RegExpMatchArray | null = decl.value.match(urlReg);
-				if (matchs === null) {
-					return;
-				}
-				// the file of url
-				const file = matchs[2];
-				// test whether the asset is included
-				const handleOptions = {
-					include: opts.include,
-					exclude: opts.exclude,
-					extensions: opts.extensions,
-					file
-				};
-				if (!shouldHandle(handleOptions)) {
-					return;
-				}
-				// handle asset
-				const urlValue = handleAsset({
-					...opts,
-					importer: decl.source.input.file,
-					file
-				});
+				const urlReg = /url\((\"|\')(.+?)(\1)\)/g;
 				// overwrite the url value
-				decl.value = `url('${urlValue}')`;
+				decl.value = decl.value.replace(urlReg, (match, $1, $2, $3) => {
+					const file = $2;
+					// test whether the asset is included
+					const handleOptions = {
+						include: opts.include,
+						exclude: opts.exclude,
+						extensions: opts.extensions,
+						file
+					};
+					if (!shouldHandle(handleOptions)) {
+						return match;
+					}
+					// handle asset
+					const urlValue = handleAsset({
+						...opts,
+						importer: decl.source.input.file,
+						file
+					});
+					return `url(${$1 + urlValue + $3})`;
+				});
 			});
 		};
 	}
