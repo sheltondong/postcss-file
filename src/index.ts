@@ -79,7 +79,7 @@ export default postcss.plugin<PostcssFileOptions>('postcss-file', (options): Tra
 					return;
 				}
 				// test whether the value of url is valid
-				const urlReg = /url\((\"|\')(.+?)(\1)\)/g;
+				const urlReg = /url\((\"|\')?(.+?)(\1)\)/g;
 				// overwrite the url value
 				decl.value = decl.value.replace(urlReg, (match, $1, $2, $3) => {
 					const file = $2;
