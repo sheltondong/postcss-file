@@ -1,6 +1,6 @@
 {
   "name": "postcss-file",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "PostCSS plugin for handle assets",
   "main": "dist/index.js",
   "keywords": [
@@ -22,6 +22,7 @@
   },
   "scripts": {
     "build": "rollup -c",
+    "watch": "rollup -c --watch",
     "changelog": "./node_modules/.bin/standard-version",
     "test": "jest",
     "test:coverage": "jest --coverage",
@@ -34,11 +35,13 @@
   "homepage": "https://github.com/DongShelton/postcss-file",
   "dependencies": {
     "chalk": "^2.3.1",
+    "is-valid-path": "^0.1.1",
     "mkdirp": "^0.5.1",
     "postcss": "^6.0.16"
   },
   "devDependencies": {
     "@types/chalk": "^2.2.0",
+    "@types/is-valid-path": "^0.1.0",
     "@types/jest": "^22.1.3",
     "@types/mkdirp": "^0.5.2",
     "@types/node": "^9.4.6",

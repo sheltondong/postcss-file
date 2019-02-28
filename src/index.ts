@@ -1,4 +1,5 @@
 import * as postcss from 'postcss';
+import isValid from 'is-valid-path';
 import { Transformer } from 'postcss';
 import { shouldHandle } from './utils/filters';
 import { handleAsset } from './utils/urlHandler';
@@ -81,8 +82,11 @@ export default postcss.plugin<PostcssFileOptions>('postcss-file', (options): Tra
 				// test whether the value of url is valid
 				const urlReg = /url\((\"|\')?(.+?)(\1)\)/g;
 				// overwrite the url value
-				decl.value = decl.value.replace(urlReg, (match, $1, $2, $3) => {
+				decl.value = decl.value.replace(urlReg, (match, $1 = '', $2, $3 = '') => {
 					const file = $2;
+					if (!isValid(file)) {
+						return `url(${$1 + $2 + $3})`;
+					}
 					// test whether the asset is included
 					const handleOptions = {
 						include: opts.include,
